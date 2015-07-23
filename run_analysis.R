@@ -29,5 +29,11 @@ meansandstds <- select(allData, one_of(selectedFeatures$V1))
 selectedData <- cbind(subjectsandactivities,meansandstds)
 
 # 3. Use descriptive activity names to name the activities in the data set
+activities <- read.table('./activity_labels.txt')
+activities <- rename(activities,Activity=V1,ActivityDescription = V2)
+mergedData <- merge(selectedData,activities)
+
 # 4. Appropriately label the data set with descriptive variable names. 
+
+
 # 5. From the data set in step 4, create a second, independent tidy data set with the average of each variable for each activity and each subject.
