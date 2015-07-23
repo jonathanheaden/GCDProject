@@ -13,7 +13,6 @@ trainDataY<-rename(trainDataY,Activity=V1)
 testSubjects <- rename(testSubjects,SubjectID=V1)
 trainSubjects <- rename(trainSubjects,SubjectID=V1)
                       
-
 testData <- cbind(testSubjects,testDataY,testDataX)
 trainData <- cbind(trainSubjects,trainDataY,trainDataX)
 
@@ -24,8 +23,9 @@ allData <- rbind(testData,trainData)
 features <- read.table("./features.txt")
 requiredFeatures <- filter(features, grepl("mean()|std()",V2)) %>% select (V1)
 requiredFeatures <- mutate(requiredFeatures, V1=paste("V",V1,sep=""))
+selectedFeatures <- lapply(requiredFeatures,print)
 subjectsandactivities <- select(allData,SubjectID,Activity)
-meansandstds <- select(allData, one_of(as.vector(requiredFeatures, mode="character")))
+meansandstds <- select(allData, one_of(selectedFeatures$V1))
 selectedData <- cbind(subjectsandactivities,meansandstds)
 
 # 3. Use descriptive activity names to name the activities in the data set
