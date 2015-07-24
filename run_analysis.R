@@ -157,6 +157,9 @@ measurements <- c(
 
 meltedData <- melt(mergedData,id=c("ActivityDescription","SubjectID"),measure.vars = measurements)
 
-
 ActivityData <- dcast(meltedData,ActivityDescription ~ variable, mean)
 SubjectData <- dcast(meltedData,SubjectID ~variable, mean)
+
+# Write the data to tables
+write.table(ActivityData, "./ActivityDataShaped.txt", sep="\t")
+write.table(SubjectData, "./SubjectDataShaped.txt", sep="\t")
