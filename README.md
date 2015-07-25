@@ -22,4 +22,13 @@ The activity labels text file contains the descriptive text for each activity ID
 The previously manipulated data is further changed to rename each column with a descriptive name that doesn't include special characters "()-" are removed from what is in features.txt
 
 ### 5. From the data set in step 4, create a second, independent tidy data set with the average of each variable for each activity and each subject.
-The data from steps 1-4 is melted to allow aggregate calculation of the mean using dcast from the dplyr package
+The data from steps 1-4 is melted to allow aggregate calculation of
+the mean using dcast from the dplyr package
+One row of averages of the data is gathered for each of the 6
+activities into ActivityData 
+One row of averages of the data is gathered for each of the 30
+subjects into SubjectData
+The Activity and subjects columns in each frame is renamed to
+'ObjectofMeasurement' with the Subject IDs having the word "Subject"
+prepended to make it more apparant what the heading relates to, and to
+convert it to character

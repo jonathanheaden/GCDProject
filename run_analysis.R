@@ -159,7 +159,12 @@ meltedData <- melt(mergedData,id=c("ActivityDescription","SubjectID"),measure.va
 
 ActivityData <- dcast(meltedData,ActivityDescription ~ variable, mean)
 SubjectData <- dcast(meltedData,SubjectID ~variable, mean)
+ActivityData <- rename(ActivityData,ObjectOfMeasurement=ActivityDescription)
+SubjectData <- rename(SubjectData,ObjectOfMeasurement=SubjectID)
+SubjectData <- mutate(SubjectData, ObjectOfMeasurement=paste("Subject",ActivityOrSubject,sep=""))
+MergedActvityAndSubjectData <- rbind(ActivityData,SubjectData)
 
 # Write the data to tables
 write.table(ActivityData, "./ActivityDataShaped.txt", sep="\t")
 write.table(SubjectData, "./SubjectDataShaped.txt", sep="\t")
+write.table(MergedActvityAndSubjectData, "./AllActivityAndSubjectData.txt", sep="\t")
